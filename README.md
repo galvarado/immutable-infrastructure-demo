@@ -1,16 +1,16 @@
 # immutable-Infrastructure-demo
  Demo project that uses Packer, Ansible, and Terraform to build inmutable infrastructure 
 
-The workflow is:
- - Bake the golden image with packer. It use ansible to provision the software.
- - Based on the resulting image, terraform create a VM. It use a regex to find the image and use always the most recent.
+Workflow:
+ - Bake the golden image with packer. It use ansible to provision the software. (In this demo just update packages)
+ - Based on the resulting image, terraform create a VM. It use a regex to find the image id and  always use the most recent.
 
 
 ## Requirements
 
-Install Packer to build the image: https://www.packer.io/docs/install
-Install Terraform to provision the VM:  https://learn.hashicorp.com/tutorials/terraform/install-cli
-Get a Digital Ocean API token: https://cloud.digitalocean.com/account/api/tokens
+ - Install Packer to build the image: https://www.packer.io/docs/install
+ - Install Terraform to provision the VM:  https://learn.hashicorp.com/tutorials/terraform/install-cli
+ - Get a Digital Ocean API token: https://cloud.digitalocean.com/account/api/tokens
 
 
 
@@ -47,7 +47,7 @@ droplet_region: The region where the droplet will be deployed
 
 To obtain the values of the region, the ssh key, the name  of the image and the size of the virtual machine, install the Digital Ocean command-line client: https://www.digitalocean.com/docs/apis-clis/doctl/
 
-Export the DO token asn an environment variable:
+Export the DO token as an environment variable:
 ```
 export DIGITALOCEAN_API_TOKEN=xxxdfc7f164a7001f76048313b0970bd46092f20569b9780ac242b00c9a7axxx
 ```
@@ -60,14 +60,6 @@ To list all available ssh keys in the account:
 
 $ doctl  -t $DIGITALOCEAN_API_TOKEN compute ssh-key list
 ```
-
-
-To list all OS available:
-```
-
-$ doctl  -t $DIGITALOCEAN_API_TOKEN compute  image list --public
-```
-
 
 To list all OS available:
 ```
@@ -97,6 +89,7 @@ droplet_region = "nyc1"
 To deploy the server we just have to execute the following commands:
 
 ```
+$ terraform init
 $ terraform plan
 $ terraform apply
 ```
