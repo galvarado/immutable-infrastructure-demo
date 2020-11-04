@@ -1,5 +1,5 @@
 # immutable-Infrastructure-demo
- Demo project that uses Packer, Ansible, and Terraform to build inmutable infrastructure 
+ Demo project that uses Packer, Ansible, and Terraform to build immutable infrastructure 
 
 Workflow:
  - Bake the golden image with packer. It use ansible to provision the software. (In this demo just update packages)
@@ -57,20 +57,17 @@ Change the value to your token.
 
 To list all available ssh keys in the account:
 ```
-
 $ doctl  -t $DIGITALOCEAN_API_TOKEN compute ssh-key list
 ```
 
 To list all OS available:
 ```
-
 $ doctl  -t $DIGITALOCEAN_API_TOKEN compute  region list
 ```
 
 
 To list all sizes available:
 ```
-
 $ doctl  -t $DIGITALOCEAN_API_TOKEN compute  size list
 ```
 
@@ -89,6 +86,7 @@ droplet_region = "nyc1"
 To deploy the server we just have to execute the following commands:
 
 ```
+$ cd terraform
 $ terraform init
 $ terraform plan
 $ terraform apply
