@@ -1,0 +1,17 @@
+# terraform
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/*.tfvars
+terraform/crash.log
+terraform/override.tf
+terraform/override.tf.json
+terraform/*_override.tf
+terraform/*_override.tf.json
+
+# packer
+packer/packer_cache/
+packer/output/
+packer/iso/
+packer/crash.log
+
+
