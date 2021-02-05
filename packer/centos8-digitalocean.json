@@ -1,0 +1,23 @@
+{
+  "variables": {
+    "do_api_token": "{{env `DIGITALOCEAN_API_TOKEN`}}"
+  },
+
+  "builders": [{
+    "type": "digitalocean",
+    "api_token": "{{user `do_api_token`}}",
+    "size": "s-1vcpu-1gb",
+    "region": "nyc1",
+    "image": "centos-8-x64",
+    "droplet_name": "packer-centos8-x64",
+    "snapshot_name": "image-by-packer-centos8-x64-{{timestamp}}",
+    "ssh_username": "root",
+    "private_networking": true,
+    "monitoring": true
+  }],
+
+  "provisioners": [{
+    "type": "ansible",
+    "playbook_file": "../ansible/bootstrap.yml"
+  }]
+}

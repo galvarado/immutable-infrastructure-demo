@@ -1,0 +1,57 @@
+---
+- name: 'Bootstrap server and Install application'
+  hosts: default
+
+  tasks:
+
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+      become: yes
+
+    - name: Install nginx
+      yum:
+        name: nginx
+        state: present
+      become: yes
+
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+      become: yes
+
+    - name: "create html directory"
+      become: yes
+      file:
+        path: /usr/share/nginx/html/app
+        state: directory
+        mode: '0775'
+
+    - name: "sync app code"
+      become: yes
+      synchronize:
+        src: ../app/
+        dest: /usr/share/nginx/html/app
+        archive: no
+        checksum: yes
+        recursive: yes
+        delete: yes
+      
+
+    - name: Update default document root
+      become: yes
+      replace: 
+        path: "/etc/nginx/nginx.conf"
+        replace: "root         /usr/share/nginx/html/app;"
+        regexp: "root         /usr/share/nginx/html;"
+      notify: restart nginx
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+      become: yes

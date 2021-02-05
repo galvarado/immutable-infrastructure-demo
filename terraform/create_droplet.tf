@@ -12,7 +12,7 @@ provider "digitalocean" {
 
 # Get snapshot name
 data "digitalocean_droplet_snapshot" "ubuntu2004-packer-image" {
-  name_regex  = "^ubuntu2004-packer"
+  name_regex  = "^image-by-packer-centos8"
   region      = "nyc1"
   most_recent = true
 }
