@@ -2,7 +2,7 @@
  Demo project that uses Packer, Ansible, and Terraform to build immutable infrastructure 
 
 Workflow:
- - Bake the golden image with packer. It use ansible to provision the software. (In this demo just update packages)
+ - Bake the golden image with packer. It use ansible to provision the software.
  - Based on the resulting image, terraform create a VM. It use a regex to find the image id and  always use the most recent.
 
 
